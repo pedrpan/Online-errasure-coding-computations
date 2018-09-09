@@ -46,19 +46,19 @@ def Post(n, r, x, p = []):
     return (a*c)/b
 
 
-x = 16
+x = 8
 n = 8
 r = 3
-p1 = [2,1,0,5]
-p2 = [2,0,2,4]
-p3 = [1,2,1,4]
-p4 = [0,4,0,4]
-p5 = [1,1,3,3]
-p6 = [0,3,2,3]
-p7 = [1,0,5,2]
-p8 = [0,2,4,2]
-p9 = [0,1,6,1]
-p10 =[0,0,8,0]
+p1 = [5,0,1,2]
+p2 = [4,2,0,1]
+p3 = [4,1,2,1]
+p4 = [3,3,1,1]
+p5 = [2,5,0,1]
+p6 = [4,0,4,0]
+p7 = [3,2,3,0]
+p8 = [2,4,2,0]
+p9 = [1,6,1,0]
+p10 =[0,8,0,0]
 
 Z = Post(n, r, x, p1)+Post(n, r, x, p2)+Post(n, r, x, p3)+Post(n, r, x, p4)+Post(n, r, x, p5)+Post(n, r, x, p6)+Post(n, r, x, p7)+Post(n, r, x, p8)+Post(n, r, x, p9)+Post(n, r, x, p10)
 
@@ -68,60 +68,60 @@ def Prob(n, r, x, p = []):
 
 print("\n")
 print(p1)
-print("here is the probability of p1", Post(n, r, x, p1))
+print("here is the probability of p1", Prob(n, r, x, p1))
 print("\n")
 
 print(p2)
-print("here is the probability of p2", Post(n, r, x, p2))
+print("here is the probability of p2", Prob(n, r, x, p2))
 print("\n")
 
 print(p3)
-print("here is the probability of p3", Post(n, r, x, p3))
+print("here is the probability of p3", Prob(n, r, x, p3))
 print("\n")
 
 print(p4)
-print("here is the probability of p4", Post(n, r, x, p4))
+print("here is the probability of p4", Prob(n, r, x, p4))
 print("\n")
 
 print(p5)
-print("here is the probability of p5", Post(n, r, x, p5))
+print("here is the probability of p5", Prob(n, r, x, p5))
 print("\n")
 
 print(p6)
-print("here is the probability of p6", Post(n, r, x, p6))
+print("here is the probability of p6", Prob(n, r, x, p6))
 print("\n")
 
 print(p7)
-print("here is the probability of p7", Post(n, r, x, p7))
+print("here is the probability of p7", Prob(n, r, x, p7))
 print("\n")
 
 print(p8)
-print("here is the probability of p8", Post(n, r, x, p8))
+print("here is the probability of p8", Prob(n, r, x, p8))
 print("\n")
 
 print(p9)
-print("here is the probability of p9", Post(n, r, x, p9))
+print("here is the probability of p9", Prob(n, r, x, p9))
 print("\n")
 
 print(p10)
-print("here is the probability of p10", Post(n, r, x, p10))
+print("here is the probability of p10", Prob(n, r, x, p10))
 print("\n")
 
 print("here is Z", Z)
 print("\n")
 
 print("The configuration of the most probable congiguration is")
-print(Post(n, r, x, p8)/Z)
+print(Prob(n, r, x, p8))
 print("where where the configuration is ", p8)
 print("\n")
 
 
-print("If you only are only allowed to move at most 2 balls from the configuration")
+print("If you only are only allowed to move at most 1 balls from the configuration")
 print(p10)
 print("the probability of the configuration is")
-print(Prob(n, r, x, p7)+Prob(n, r, x, p8)+Prob(n, r, x, p9)+Prob(n, r, x, p10))
+print(Prob(n, r, x, p9)+Prob(n, r, x, p10))
 print("corresponding to the configurations")
-print(p7, p8, p9, p10)
+print(p9, p10)
 print("\n")
 
 def f(i):
@@ -147,3 +147,20 @@ def f(i):
         return Prob(n, r, x, p10)
     else:
         return 0
+
+import matplotlib.pyplot as plt; plt.rcdefaults()
+import numpy as np
+import matplotlib.pyplot as plt
+
+objects = ('1','2','3','4','5','6','7','8','9','10')
+y_pos = np.arange(len(objects))
+performance = [f(1),f(2),f(3),f(4),f(5),f(6),f(7),f(8),f(9),f(10)]
+
+f = plt.figure()
+plt.bar(y_pos, performance, align='center', alpha=0.5)
+plt.xticks(y_pos, objects)
+plt.ylabel('Probabilities')
+plt.title('Probabilities of configurations')
+plt.show()
+
+f.savefig("nef.pdf", bbox_inches='tight')
